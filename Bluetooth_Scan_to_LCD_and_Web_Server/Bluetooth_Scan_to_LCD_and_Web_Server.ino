@@ -10,16 +10,6 @@
 //-------------------------------------------------------------------
 // napisao: Hrvoje Šomođi, Vidi - 17.1.2020.
 //-------------------------------------------------------------------
-// Kod je izdan pod Creative Commons licencom - CC BY 3.0 HR
-// https://creativecommons.org/licenses/by/3.0/hr/
-// Možete umnažati i redistribuirati kod  u bilo kojem mediju ili formatu.
-// Možete remiksirati, mijenjati i prerađivati kod u bilo koju svrhu, pa i komercijalnu.
-// Morate adekvatno navesti autora, uvrstiti link na licencu i naznačiti eventualne izmjene.
-// Možete to učiniti na bilo koji razuman način, ali ne smijete sugerirati da davatelj 
-// licence izravno podupire Vas ili Vaše korištenje djela.
-// Ne smijete dodavati pravne uvjete ili tehnološke mjere zaštite koji će druge pravno 
-// ograničiti da čine ono što im licenca dopušta.
-//
 // Nedostaju li vam niže spomenuti libraryji
 // odaberite Manage Libraries sa izboranika Alti
 // zatim u tražilicu upišite ILI9341
