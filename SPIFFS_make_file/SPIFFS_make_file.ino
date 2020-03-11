@@ -27,24 +27,27 @@ void setup() {
     return;
   }
  
-  File root = SPIFFS.open("/");
-  File file = root.openNextFile();
+  File file = SPIFFS.open("/VIDI.txt", FILE_WRITE);
  
-  while(file){
-      Serial.print("FILE: ");
-      Serial.println(file.name());
-      tft.setTextWrap(false);
-      tft.setCursor(10, 0);
-      tft.setTextColor(CYAN);
-      tft.setTextSize(1);
-      tft.println("Uspjesno zapisana datoteka");
-      tft.setCursor(10, 30);
-      tft.setTextColor(WHITE);
-      tft.setTextSize(1);
-      tft.print("FILE: ");
-      tft.println(file.name());
-     
+  if (!file) {
+    Serial.println("Greska prilikom kreiranja datoteke");
+    return;
   }
+  if (file.print("VIDI")) {
+    Serial.println("Datoteka uspjesno zapisana");
+    tft.setCursor(10, 0);
+    tft.setTextColor(CYAN);
+    tft.setTextSize(1);
+    tft.println("Datoteka uspjesno zapisana");
+  } else {
+    Serial.println("Greska prilikom zapisa");
+    tft.setCursor(10, 0);
+    tft.setTextColor(CYAN);
+    tft.setTextSize(1);
+    tft.println("Greska prilikom zapisa");
+  }
+ 
+  file.close();
 }
  
 void loop() {}
