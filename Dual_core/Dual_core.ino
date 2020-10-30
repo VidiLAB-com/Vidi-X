@@ -23,7 +23,7 @@ const int led2 = 2; // moguće zamjeniti drugom LED-icom na drugom PIN-u
 void setup() {
 tft.begin();
 tft.setRotation(3);
-tft.fillScreen(BLACK);
+tft.fillScreen(0);
 Serial.begin(115200);
 pinMode(led1, OUTPUT);
 pinMode(led2, OUTPUT);
