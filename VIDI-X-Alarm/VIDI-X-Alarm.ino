@@ -130,6 +130,7 @@ void loop(void)
       //TFT.print(o);
     }
     srednjaVreijdnost = srednjaVreijdnost / brojUzoraka; // računamo artitmetičku sredinu
+    
     if ( !digitalRead(Btn_Menu) ) { //ukoliko je pritisnut gumb
       arm = !arm;                   //promijeni vrijednost logičke varijable - aktiviraj/deaktiviraj alarm
       ledcWriteTone (0, NOTA_C5);   //odsviraj zvuk stisnutog gumba
