@@ -21,6 +21,9 @@
 #include <SPI.h>
 #include "Adafruit_ILI9341.h"
 #include "Adafruit_GFX.h"
+// Nemate li library, kliknite na link za instalaciju:
+// http://librarymanager/All#Adafruit_ILI9341
+// Obavezno kliknite na "Install All" gumb
 
 #define TFT_DC 21 // Data/Command VIDI X zaslona spojen je na PIN 21
 #define TFT_CS 5  // Chip select VIDI X zaslona spojen je na PIN 5
