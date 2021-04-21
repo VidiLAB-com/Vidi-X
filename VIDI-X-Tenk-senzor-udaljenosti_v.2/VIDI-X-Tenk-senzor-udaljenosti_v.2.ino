@@ -8,7 +8,7 @@
 // https://vidilab.com/vidi-project-x
 //
 //-------------------------------------------------------------------
-// napisao: Hrvoje Šomođi, Vidi - 16.4.2021.
+// napisao: Hrvoje Šomođi, Vidi - 19.4.2021.
 //-------------------------------------------------------------------
 //
 // Nedostaju li vam niže spomenuti libraryji
@@ -91,7 +91,8 @@ int element;
 // ili treba odabrati kvalitenije napajanje motora
 // Treba odrediti "vrijednost" koja odgovara vremenu potrebnom za okretanje šesnajstine kruga
 // Varijabla "vrijednost" će se koristiti barem dok robot ne dobije Kompas za orijentaciju
-int vrijednost = 730; 
+// Na glatkoj podlozi lakše je okrenuti robota pa vrijednost treba prilagoditi i uslijed razlike u terenu
+int vrijednost = 210;
 
 // idealno bi bilo orijebntaciju mjeriti kompasom
 void Motor_Init() {
@@ -218,7 +219,6 @@ void Motor_Down() {
 
 void Mala_udaljenost()
 {
-
   for ( j = 0; ++j <= 100; ) //
   {
     Turn_Left();
@@ -229,7 +229,6 @@ void Mala_udaljenost()
     Turn_Right();
     Serial.println("Right");
   }
-
 }
 
 void setup(void)
@@ -342,9 +341,6 @@ void brzi_senzor()
 void izmjeri_udaljenost() // Izmjeri udaljenost oko sebe
 {
   for (int o = 0; o < 16; o = o + 1) { // Premještamo niz kako bi napravili mjesta za novu vrijednost
-    Turn_Left();
-    delay(vrijednost); // Treba odrediti "vrijednost" kojom će tenk napraviti puni krug u 16 prolaza petlje
-    Stop();
     brzi_senzor();
     circValues[o] = distance;
     // Ispisujemo vrijednosti udaljenosti na ekran
@@ -352,14 +348,16 @@ void izmjeri_udaljenost() // Izmjeri udaljenost oko sebe
     TFT.print(o);
     TFT.print(")= ");
     TFT.println(circValues[o]);
-
+    Turn_Left();
+    delay(vrijednost); // Treba odrediti "vrijednost" kojom će tenk napraviti puni krug u 16 prolaza petlje
+    Stop();
   }
 }
 
 void mjeri_najdalje() // Gdje je najdalje mjerenje
 {
   najdalje = 0;
-  element = -1;
+
   for (int o = 0; o < 16; o = o + 1) { // Premještamo niz kako bi napravili mjesta za novu vrijednost
     if ( circValues[o] > najdalje )
     {
@@ -379,31 +377,48 @@ void loop(void)
   Stop();
   //Turn_Left();
   TFT.fillScreen(ILI9341_BLACK); // obojaj zaslon u crno
+  TFT.fillScreen(ILI9341_BLACK); // obojaj zaslon u crno
+  TFT.setTextColor(ILI9341_RED); // postavljamo boju teksta u zelenu
+  TFT.setTextSize(3);
+  TFT.setCursor(0, 170);
+  TFT.println("      VIDI X");
+  TFT.println(" Autonomni robot ");
+  TFT.setTextColor(ILI9341_BLUE);
+  TFT.print("==##=========##==");
   TFT.setTextColor(ILI9341_GREEN); // postavljamo boju teksta u zelenu
+  TFT.setTextSize(1);
   TFT.setCursor(0, 0);
-
   izmjeri_udaljenost();
   mjeri_najdalje(); // Gdje je najdalje mjerenje
   // Okreni se prema najdaljoj udaljenosti
   TFT.print("Okrecem se za ");
-  TFT.print(15 - element);
+  TFT.print(16 - element);
   TFT.print(".");
   TFT.println(" ");
-  for (int o = 0; o < ( 15 - element ); o = o + 1) {
+  for (int o = 1; o < ( 16 - element ); o = o + 1) {
     Turn_Right();
     delay(vrijednost); // Treba odrediti "vrijednost" kojom će tenk napraviti puni krug u 16 prolaza petlje
     Stop();
   }
   TFT.print("Vozim ravno ");
-  TFT.print(najdalje * 10);
-  TFT.print(" milisekundi");
+  TFT.print(najdalje);
+  TFT.print(" milimetara");
   TFT.println(" ");
+  
+  //delay(2000); // Odmori zbog testiranja
+  
   Forward();
-  delay( najdalje * 10 ); // Kreći se naprijed prema nekom mjerenju
+  while ( srednjaVreijdnost > 300 )
+  {
+    //delay( najdalje / 2 ); // Kreći se naprijed prema nekom mjerenju
+    brzi_senzor();
+    TFT.setTextColor(ILI9341_YELLOW); // postavljamo boju teksta u žutu
+    TFT.print(distance);
+    TFT.print("; ");
+  }
   Stop(); // Zaustavi sve motore
-  delay(9000); // Odmori zbog testiranja
+  delay(1000); // Odmori zbog testiranja
   // Možemo krenuti ispočetka mjeriti udaljenosti
-
   // DTest(1000); // Koristili smo za testiranje spojeva
   // Mala_udaljenost();
 }
