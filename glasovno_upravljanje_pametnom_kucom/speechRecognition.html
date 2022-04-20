@@ -1,0 +1,36 @@
+<body style="font-size:30px">
+<img src="https://camo.githubusercontent.com/f308b028e5bc8307bb1730c94adb99d634b362c53493a59c05474d1cde006e80/68747470733a2f2f766964696c61622e636f6d2f6d656469612f6b322f6974656d732f63616368652f36373961613535306334363162333534636566346335663732666538633761625f584c2e6a7067" width="100%" >
+
+    <!-- Input area -->
+    <center><label for="Speech Recognition"><strong>Speech Recognition for<br/>VIDI X mikroraèunalo<br/>na lokalnoj IP adresi<br/>192.168.1.184<br/></strong></label>
+    <input type="text" name="" id="speechToText" placeholder="Speak Something" onload="record()"></center>
+
+    <!-- Below is the script for voice recognition and conversion to text -->
+    <script>
+        function record() {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang =  "hr-HR"; //"en-US"; //"en-GB"; //
+
+            recognition.onresult = function(event) {
+                console.log(event);
+                document.getElementById('speechToText').value = event.results[0][0].transcript;
+                
+                location.href = "http://192.168.1.184/stt?text="+ event.results[0][0].transcript 
+            }
+            recognition.start();
+
+        }
+    </script>
+    
+    <script> record(); </script>
+
+
+    <!-- Below is the script for autoreload this web page every 10 seconds -->
+	<script> 
+		setInterval(function() {
+              	window.location.reload();
+              }, 10000); 
+	</script>
+
+</body>
+	
