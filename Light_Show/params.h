@@ -19,4 +19,4 @@
 #define COEF2 5
 #define COEF3 3
 #define SILENCE 1426
-#define SENSITIVITY 30 // decrease for better sensitivity
+//#define SENSITIVITY 30 // decrease for better sensitivity

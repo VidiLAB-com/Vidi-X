@@ -183,10 +183,10 @@ void drawStartScreen()
   TFT.setTextSize(4);
   TFT.setCursor(95, 170);
   TFT.print("VIDI X");
-  TFT.setCursor(35, 200);
+  TFT.setCursor(40, 200);
   TFT.setTextColor(ILI9341_YELLOW);
   TFT.setTextSize(3);
-  TFT.print("MIKRO RACUNALO");
+  TFT.print("MIKRORACUNALO");
 }
 
 // send data

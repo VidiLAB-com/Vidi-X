@@ -24,6 +24,10 @@ CRGB leds[NUM_LEDS];
 
 #define BUTTON_1            35 // UP Down
 #define BUTTON_2            34 // Volume
+#define BUTTON_3            27 // UP Sense
+#define BUTTON_4            13 // Down Sense
+
+int SENSITIVITY = 15;
 
 TFT_eSPI display = TFT_eSPI(); // Invoke custom library
 
@@ -43,7 +47,10 @@ void setup() {
   //Serial.begin(115200);
   Serial.begin(57600);
   pinMode(BUTTON_1, INPUT_PULLUP);
-
+    pinMode(BUTTON_2, INPUT_PULLUP);
+      pinMode(BUTTON_3, INPUT_PULLUP);
+        pinMode(BUTTON_4, INPUT_PULLUP);
+  Serial.println("1");
   display.init();
   display.fillScreen(TFT_BLACK);
   display.setRotation(3);
@@ -54,12 +61,19 @@ void setup() {
   delay(2000);
   sampling_period_us = round(1000ul * (1.0 / MAX_FREQ));
   chrono1 = millis();
-
+  Serial.println("2");
   LEDS.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);
   LEDS.setBrightness(84);
+  Serial.println("3");
 }
 
 void loop() {
+
+
+  if (digitalRead(BUTTON_3) == LOW ) { SENSITIVITY--; Serial.println(SENSITIVITY); delay(100); }
+  if (digitalRead(BUTTON_4) == LOW ) { SENSITIVITY++; Serial.println(SENSITIVITY); delay(100); }
+
+  
   static int modes = 0;
   bool changeMode = false;
   // Push the button to change modes

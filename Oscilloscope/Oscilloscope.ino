@@ -31,7 +31,7 @@
 Adafruit_ILI9341 TFT = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 // Analogni pin 14 spojen je na mikrofon sa mikrodfonskim predpojačalom
-const int analogInPin = 14;   // Analogni input pin
+const int analogInPin = 35;   // Analogni input pin
 
 // varijable za dimenzije zaslona
 int myWidth;
@@ -40,6 +40,7 @@ int myHeight;
 void setup() 
 {
   pinMode(analogInPin, INPUT);   // Postavi pin senzora kao INPUT
+    pinMode(analogInPin-1, INPUT);   // Postavi pin senzora kao INPUT
   TFT.begin();                   // inicijalizacuija zaslona
   TFT.setRotation(3);            // postavi orijentaciju
   myWidth  = TFT.width() ;       // ekran je širok
@@ -58,6 +59,7 @@ void loop()
     // map(analogRead(analogInPin), 0, 4095, myHeight - 1, 1)
     // liste, te je sve zajeno ugnježđeno u 
     TFT.drawPixel(j, map(analogRead(analogInPin), 0, 4095, myHeight - 1, 1), ILI9341_YELLOW);
+        TFT.drawPixel(j, map(analogRead(analogInPin-1), 0, 4095, myHeight - 1, 1), ILI9341_GREEN);
     // Kada bismo za funkciju
     // analogRead(analogInPin)
     // odredili varijablu poput
