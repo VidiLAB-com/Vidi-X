@@ -59,7 +59,7 @@ void loop()
     // map(analogRead(analogInPin), 0, 4095, myHeight - 1, 1)
     // liste, te je sve zajeno ugnježđeno u 
     TFT.drawPixel(j, map(analogRead(analogInPin), 0, 4095, myHeight - 1, 1), ILI9341_YELLOW);
-        TFT.drawPixel(j, map(analogRead(analogInPin-1), 0, 4095, myHeight - 1, 1), ILI9341_GREEN);
+    //    TFT.drawPixel(j, map(analogRead(analogInPin-1), 0, 4095, myHeight - 1, 1), ILI9341_GREEN);
     // Kada bismo za funkciju
     // analogRead(analogInPin)
     // odredili varijablu poput
