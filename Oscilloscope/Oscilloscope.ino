@@ -31,7 +31,7 @@
 Adafruit_ILI9341 TFT = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 // Analogni pin 14 spojen je na mikrofon sa mikrodfonskim predpojačalom
-const int analogInPin = 35;   // Analogni input pin
+const int analogInPin = 14;   // Analogni input pin
 
 // varijable za dimenzije zaslona
 int myWidth;
