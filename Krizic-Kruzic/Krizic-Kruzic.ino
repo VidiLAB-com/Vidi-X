@@ -156,6 +156,7 @@ void resetGame()
   moves = 1;
   winner = 0;
   gameScreen = 2;
+  delay(500);
 }
 
 void drawGameScreen()
